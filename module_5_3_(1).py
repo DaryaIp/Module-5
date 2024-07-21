@@ -30,9 +30,35 @@ class House:
         isinstance(value, int)
         self.number_of_floors += value
         return self
+    def __iadd__(self, value):
+        self.number_of_floors += value
+        return self
+    def __radd__(self, value):
+        self.number_of_floors += value
+        return self
+    def __gt__(self, other):
+        return self.number_of_floors > other.number_of_floors
+    def __ge__(self, other):
+        return self.number_of_floors >= other.number_of_floors
+    def __lt__(self, other):
+        return self.number_of_floors < other.number_of_floors
+    def __le__(self, other):
+        return self.number_of_floors <= other.number_of_floors
+    def __ne__(self, other):
+        return self.number_of_floors != other.number_of_floors
+
+    def __del__(self):
+        print(f"{self.name} снесён, но он останется в истории")
 
 house_1 = House('Ереван', 10)
+print(House.houses_history)
 house_2 = House('ЖК Горнолыжный', 15)
-print(house_1)
-print(house_2)
-
+print(House.houses_history)
+house_3 = House('ТК Европолис', 3)
+print(House.houses_history)
+house_4 = House('БЦ Крылатский', 18)
+print(House.houses_history)
+# Удаление объектов
+del house_1
+del house_2
+print(House.houses_history)
